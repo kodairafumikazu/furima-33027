@@ -1,24 +1,57 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| nickname | string | null: false |
+| email    | string | null: false |
+| password | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :layout_users
+- has_many :orders
+ <!-- through: layout_users -->
 
-* Configuration
+## layouts テーブル
 
-* Database creation
+| Column                     | Type   | Options     |
+| ---------------------------| ------ | ----------- |
+| seller                     | string | null: false |
+| category                   | string | null: false |
+| condition                  | string | null: false |
+| shopping change            | string | null: false |
+| delivery area              | string | null: false |
+| shopping date              | string | null: false |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :layout_users
+- has_many :users           
+- has_many :orders
+<!-- <% through: layout_users %> -->
 
-* Services (job queues, cache servers, search engines, etc.)
+<!-- ## layout_users テーブル
 
-* Deployment instructions
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| layout | references | null: false, foreign_key: true | -->
 
-* ...
+<!-- ### Association
+
+- belongs_to :layout
+- belongs_to :user -->
+
+## orders テーブル
+
+| Column           | Type       | Options                        |
+| -----------------| ---------- | ------------------------------ |
+| credit card      | references | null: false, foreign_key: true |
+| delivery address | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :layout

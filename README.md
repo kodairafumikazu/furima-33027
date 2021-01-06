@@ -10,26 +10,43 @@
 
 ### Association
 
-- has_many :layout_users
+- has_many :items
 - has_many :orders
  <!-- through: layout_users -->
 
-## layouts テーブル
+## items テーブル
 
-| Column                     | Type   | Options     |
-| ---------------------------| ------ | ----------- |
-| seller                     | string | null: false |
-| category                   | string | null: false |
-| condition                  | string | null: false |
-| shopping change            | string | null: false |
-| delivery area              | string | null: false |
-| shopping date              | string | null: false |
+| Column              | Type   | Options     |
+| ------------------- | ------ | ----------- |
+| image               | string | null: false |
+| description         | string | null: false |
+| category            | string | null: false |
+| condition           | string | null: false |
+| charge              | string | null: false |
+| delivery            | string | null; false |
+| price               | string | null: false |
 
 ### Association
 
-- has_many :layout_users
-- has_many :users           
 - has_many :orders
+- belongs to :user
+
+## orders テーブル
+
+| Column             | Type   | Options     |
+| -------------------| ------ | ----------- |
+| name               | string | null: false |
+| category           | string | null: false |
+| condition          | string | null: false |
+| charge             | string | null: false |
+| area               | string | null: false |
+| date               | string | null: false |
+
+### Association
+
+- belongs to :item
+- belongs to :user           
+- has_one    :managements
 <!-- <% through: layout_users %> -->
 
 <!-- ## layout_users テーブル
@@ -44,14 +61,14 @@
 - belongs_to :layout
 - belongs_to :user -->
 
-## orders テーブル
+## managements テーブル
 
 | Column           | Type       | Options                        |
 | -----------------| ---------- | ------------------------------ |
 | credit card      | references | null: false, foreign_key: true |
-| delivery address | references | null: false, foreign_key: true |
+| address          | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :layout
+<!-- - has one :managements -->
+- belongs_to :order

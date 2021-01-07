@@ -25,12 +25,12 @@
 
 | Column                 | Type       | Options                        |
 | ---------------------- | ---------- | ------------------------------ |
-| product_name           | integer    | null: false                    |
+| product_name           | string     | null: false                    |
 | info                   | text       | null: false                    |
 | category_id            | integer    | null: false                    |
 | product_condition_id   | integer    | null: false                    |
 | shipping_charge_id     | integer    | null: false                    |
-| shipping_area_id       | integer    | null: false                    |
+| prefecture_id          | integer    | null: false                    |
 | scheduled_delivery_id  | integer    | null: false                    |
 | price                  | integer    | null: false                    |
 | user                   | references | null: false, foreign_key: true |
@@ -62,9 +62,9 @@
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
 | postal_code       | string     | null: false                    |
-| shipping_area_id  | integer    | null: false                    |
+| prefecture_id     | integer    | null: false                    |
 | city              | string     | null: false                    |
-| address           | string     | null: false                    |
+| town              | string     | null: false                    |
 | building          | string     |
 | phone_number      | string     | null: false                    |
 | purchase          | references | null: false, foreign_key: true |

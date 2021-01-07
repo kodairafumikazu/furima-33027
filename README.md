@@ -25,6 +25,7 @@
 
 | Column                 | Type       | Options                        |
 | ---------------------- | ---------- | ------------------------------ |
+| product_name           | integer    | null: false                    |
 | info                   | text       | null: false                    |
 | category_id            | integer    | null: false                    |
 | product_condition_id   | integer    | null: false                    |
@@ -64,9 +65,9 @@
 | shipping_area_id  | integer    | null: false                    |
 | city              | string     | null: false                    |
 | address           | string     | null: false                    |
-| building          | string     | null: false                    |
+| building          | string     |
 | phone_number      | string     | null: false                    |
-| management        | references | null: false, foreign_key: true |
+| purchase          | references | null: false, foreign_key: true |
 
 ### Association
 

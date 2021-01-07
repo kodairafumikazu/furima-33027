@@ -2,73 +2,73 @@
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
+| Column          | Type   | Options     |
+| --------        | ------ | ----------- |
+| nickname        | string | null: false |
+| email           | string | null: false |
+| password        | string | null: false |
+| family name     | string | null: false |
+| first name      | string | null: false |
+| family frigana  | string | null: false |
+| first frigana   | string | null: false |
+| birthday        | string | null: false |
 
 ### Association
 
-- has_many :items
-- has_many :orders
- <!-- through: layout_users -->
+- has_many   :items
+- belongs to :address                                                           
+<!-- - belongs to :management -->
+
+ 
 
 ## items テーブル
 
-| Column              | Type   | Options     |
-| ------------------- | ------ | ----------- |
-| image               | string | null: false |
-| description         | string | null: false |
-| category            | string | null: false |
-| condition           | string | null: false |
-| charge              | string | null: false |
-| delivery            | string | null; false |
-| price               | string | null: false |
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | -------------------------------|
+| description            | text       | null: false                    |
+| category               | integer    | null: false                    |
+| condition              | integer    | null: false                    |
+| charge                 | integer    | null: false                    |
+| delivery               | integer    | null: false                    |
+| prefecture             | integer    | null: false                    |
+| price                  | integer    | null: false                    |
+| user                   | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :orders
+- has_many :addresses
 - belongs to :user
 
-## orders テーブル
+## addresses テーブル
 
-| Column             | Type   | Options     |
-| -------------------| ------ | ----------- |
-| name               | string | null: false |
-| category           | string | null: false |
-| condition          | string | null: false |
-| charge             | string | null: false |
-| area               | string | null: false |
-| date               | string | null: false |
+| Column             | Type       | Options                        |
+| -------------------| ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| address            | string     | null: false                    |
+| area               | integer    | null: false                    |
+| date               | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs to :item
-- belongs to :user           
-- has_one    :managements
-<!-- <% through: layout_users %> -->
+- belongs to :user
+- belongs to :item           
+<!-- - has_one    :managements -->
 
-<!-- ## layout_users テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| layout | references | null: false, foreign_key: true | -->
 
-<!-- ### Association
-
-- belongs_to :layout
-- belongs_to :user -->
 
 ## managements テーブル
 
 | Column           | Type       | Options                        |
 | -----------------| ---------- | ------------------------------ |
-| credit card      | references | null: false, foreign_key: true |
-| address          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
 
-<!-- - has one :managements -->
-- belongs_to :order
+
+- has_one :addresses                                                              
+- belongs to :user
+- belongs to :item 

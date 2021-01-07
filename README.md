@@ -1,57 +1,58 @@
 # テーブル設計
 
+
 ## users テーブル
 
-| Column          | Type   | Options                   |
-| --------        | ------ | ------------------------- |
-| nickname        | string | null: false               |
-| email           | string | null: false, unique: true |
-| password        | string | null: false               |
-| first_name      | string | null: false               |
-| last_name       | string | null: false               |
-| first_name_kana | string | null: false               |
-| last_name_kana  | string | null: false               |
-| birth_date      | date   | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| birth_date         | date   | null: false               |
 
 ### Association
 
 - has_many   :items
-- has_many   :management
+- has_many   :purchases
 
  
 
 ## items テーブル
 
 | Column                 | Type       | Options                        |
-| ---------------------- | ---------- | -------------------------------|
+| ---------------------- | ---------- | ------------------------------ |
 | info                   | text       | null: false                    |
-| category_id            | string     | null: false                    |
-| product_condition_id   | string     | null: false                    |
-| shipping_charge_id     | string     | null: false                    |
-| shipping_area_id       | string     | null: false                    |
+| category_id            | integer    | null: false                    |
+| product_condition_id   | integer    | null: false                    |
+| shipping_charge_id     | integer    | null: false                    |
+| shipping_area_id       | integer    | null: false                    |
 | scheduled_delivery_id  | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| user_id                | references | null: false, foreign_key: true |
+| user                   | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :users
-- has_one  :managements
+- belongs to :user
+- has_one    :purchase
 
-## managements テーブル
+
+
+## purchases テーブル
 
 | Column     | Type       | Options                        |
-| -----------| ---------- | ------------------------------ |
-| user_id    | references | null: false, foreign_key: true |
-| item_id    | references | null: false, foreign_key: true |
+| ---------- | ---------- | ------------------------------ |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs to :user
 - belongs to :item
-- has_one    :addresses
-
-
+- has_one    :address
 
 
 
@@ -59,14 +60,14 @@
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| postal_code       | integer    | null: false                    |
+| postal_code       | string     | null: false                    |
 | shipping_area_id  | integer    | null: false                    |
 | city              | string     | null: false                    |
 | address           | string     | null: false                    |
 | building          | string     | null: false                    |
-| phone_number      | integer    | null: false                    |
-| management_id     | references | null: false, foreign_key: true |
+| phone_number      | string     | null: false                    |
+| management        | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs to :management
+- belongs to :purchase

@@ -2,22 +2,21 @@
 
 ## users テーブル
 
-| Column          | Type   | Options     |
-| --------        | ------ | ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| family name     | string | null: false |
-| first name      | string | null: false |
-| family frigana  | string | null: false |
-| first frigana   | string | null: false |
-| birthday        | string | null: false |
+| Column          | Type   | Options                   |
+| --------        | ------ | ------------------------- |
+| nickname        | string | null: false               |
+| email           | string | null: false, unique: true |
+| password        | string | null: false               |
+| first_name      | string | null: false               |
+| last_name       | string | null: false               |
+| first_name_kana | string | null: false               |
+| last_name_kana  | string | null: false               |
+| birth_date      | date   | null: false               |
 
 ### Association
 
 - has_many   :items
-- belongs to :address                                                           
-<!-- - belongs to :management -->
+- has_many   :management
 
  
 
@@ -25,50 +24,49 @@
 
 | Column                 | Type       | Options                        |
 | ---------------------- | ---------- | -------------------------------|
-| description            | text       | null: false                    |
-| category               | integer    | null: false                    |
-| condition              | integer    | null: false                    |
-| charge                 | integer    | null: false                    |
-| delivery               | integer    | null: false                    |
-| prefecture             | integer    | null: false                    |
+| info                   | text       | null: false                    |
+| category_id            | string     | null: false                    |
+| product_condition_id   | string     | null: false                    |
+| shipping_charge_id     | string     | null: false                    |
+| shipping_area_id       | string     | null: false                    |
+| scheduled_delivery_id  | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| user                   | references | null: false, foreign_key: true |
+| user_id                | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :addresses
-- belongs to :user
-
-## addresses テーブル
-
-| Column             | Type       | Options                        |
-| -------------------| ---------- | ------------------------------ |
-| name               | string     | null: false                    |
-| address            | string     | null: false                    |
-| area               | integer    | null: false                    |
-| date               | integer    | null: false                    |
-| user               | references | null: false, foreign_key: true |
-| item               | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs to :user
-- belongs to :item           
-<!-- - has_one    :managements -->
-
-
-
+- has_many :users
+- has_one  :managements
 
 ## managements テーブル
 
-| Column           | Type       | Options                        |
-| -----------------| ---------- | ------------------------------ |
-| user             | references | null: false, foreign_key: true |
-| item             | references | null: false, foreign_key: true |
+| Column     | Type       | Options                        |
+| -----------| ---------- | ------------------------------ |
+| user_id    | references | null: false, foreign_key: true |
+| item_id    | references | null: false, foreign_key: true |
 
 ### Association
 
-
-- has_one :addresses                                                              
 - belongs to :user
-- belongs to :item 
+- belongs to :item
+- has_one    :addresses
+
+
+
+
+
+## addresses テーブル
+
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| postal_code       | integer    | null: false                    |
+| shipping_area_id  | integer    | null: false                    |
+| city              | string     | null: false                    |
+| address           | string     | null: false                    |
+| building          | string     | null: false                    |
+| phone_number      | integer    | null: false                    |
+| management_id     | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs to :management

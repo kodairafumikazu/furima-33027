@@ -4,4 +4,7 @@ Rails.application.routes.draw do
 
   #get 'posts', to: 'posts#index'
   root to: 'items#index'
+  resources :items, only: [:new, :create, :show, :edit, :update, :destroy]
+
+  #resources :users only: :show               
 end

@@ -49,23 +49,6 @@ RSpec.describe User, type: :model do
          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
        end
 
-      # it "passwordは確認用を含めて２回入力しなければ登録できない" do
-      #   @user.password = ""
-      #   @user.valid?
-      #   expect(@user.errors.full_messages).to include 
-      # end
-
-
-
-
-      # it "重複したemailが存在する場合登録できない" do
-      #   @user.save
-      #   another_user = FactoryBot.build(:user)
-      #   another_user.email = @user.email
-      #   another_user.valid?
-      #   expect(another_user.errors.full_messages).to include("Email has already been taken")
-      # end
-      
       
   
       it "first_nameが全角（漢字、ひらがな、カタカナ）でなければ登録できない" do

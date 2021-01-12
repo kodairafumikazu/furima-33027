@@ -60,6 +60,20 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password には6文字以上の半角英字と半角数字の両方を含めて設定してください")
       end
 
+      it "passwordは半角数字がなければ登録できない" do
+        @user.password = "a"
+        @user.valid?
+        
+        expect(@user.errors.full_messages).to include("Password には6文字以上の半角英字と半角数字の両方を含めて設定してください")
+      end
+      
+      it "passwordは半角英字がなければ登録できない" do
+        @user.password = "2"
+        @user.valid?
+        binding.pry
+        expect(@user.errors.full_messages).to include("Password には6文字以上の半角英字と半角数字の両方を含めて設定してください")
+      end
+
       it "first_nameが空では登録できない" do
         @user.first_name = ""
         @user.valid?

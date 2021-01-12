@@ -5,9 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
- #has_many :purchases
   validates :nickname, presence: true,  length: { maximum: 6 }
-  #validates :email, presence: true
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には6文字以上の半角英字と半角数字の両方を含めて設定してください'          
   
@@ -16,16 +14,9 @@ class User < ApplicationRecord
     validates :last_name
   end
   with_options presence: true, format: { with: /\A[ァ-ヶ一-]+\z/, message: '全角カタカナを使用してください' } do
-    #withオプションを編集して、カタカナのみ許可するバリデーションにする
     validates :first_name_kana
     validates :last_name_kana
   end
   validates :birth_date, presence: true
 end
 
-#emailに関するバリデーションは不要
-#passwordに関するバリデーションは１つだけ必要。（半角英数字混合）
-  # PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  # validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
-#password_confirmation, encrypted_passwordに関するバリデーションは不要
-#first_name_kanaとlast_name_kanaのバリデーションを編集

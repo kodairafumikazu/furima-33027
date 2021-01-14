@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   with_options presence: true  do
     validates :product_name
     validates :info
+    validates :price
   end
 
   validates :price, numericality: {
@@ -20,10 +21,12 @@ class Item < ApplicationRecord
     less_than: 9999999                         
   }
 
-  validates :category_id, numericality: { other_than: 1 }
-  validates :product_condition_id, numericality: { other_than: 1 }
-  validates :shipping_charge_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :scheduled_delivery_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :product_condition_id
+    validates :shipping_charge_id
+    validates :prefecture_id
+    validates :scheduled_delivery_id
+  end
 end
 

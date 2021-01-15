@@ -14,6 +14,7 @@ class Item < ApplicationRecord
     validates :product_name
     validates :info
     validates :price
+    validates :image
   end
 
   validates :price, numericality: {

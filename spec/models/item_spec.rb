@@ -87,6 +87,11 @@ RSpec.describe User, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
+      it "priceの範囲が9999999以上だと登録できない" do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+      end
       it "priceが半角英数でないと登録できない" do
         @item.price = "あ"
         @item.valid?

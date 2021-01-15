@@ -13,23 +13,13 @@ RSpec.describe User, type: :model do
       it "product_nameとinfoとcategory_idとproduct_condition_idとshipping_charge_idとprefecture_idとscheduled_delivery_idとpriceが存在すれば登録できる" do
         expect(@item).to be_valid
       end
-      it "priceの範囲が300~9999999だと登録できる" do
-        @item.price = "30"
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
-      end
-      it "priceが半角英数だと登録できる" do
-        @item.price = "aa"
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
-      end
     end
 
     context 'ユーザー新規出品ができないとき' do
       it "product_nameが空では登録できない" do
         @item.product_name = ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Product name can't be blank")#("User must exist")
+        expect(@item.errors.full_messages).to include("Product name can't be blank")
       end
       it "infoが空では登録できない" do
         @item.info = ""

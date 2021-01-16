@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-  belongs_to :Prefecture
+  belongs_to :prefecture
   belongs_to :product_condition
   belongs_to :scheduled_delivery
   belongs_to :shipping_charge

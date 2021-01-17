@@ -36,8 +36,13 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    redirect_to root_path
+    if @item.user.id == current_user.id
+      if @item.destroy
+        redirect_to root_path
+      else
+        render :edit
+      end
+    end
   end
 
   private
@@ -45,10 +50,6 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:image, :product_name, :info, :category_id, :product_condition_id, :shipping_charge_id,
                                  :prefecture_id, :scheduled_delivery_id, :price).merge(user_id: current_user.id)
-  end
-
-  def move_to_index
-    redirect_to action: :index unless user_signed_in?
   end
 
   def set_item

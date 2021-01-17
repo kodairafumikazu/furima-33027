@@ -20,16 +20,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
-    
     redirect_to root_path if @item.user.id != current_user.id
   end
 
   def update
-    
     @item.update(item_params)
     if @item.save
       redirect_to root_path
@@ -39,11 +36,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    
     @item.destroy
     redirect_to root_path
   end
-
 
   private
 

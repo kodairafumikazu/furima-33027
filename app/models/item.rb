@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :product_condition
   belongs_to :scheduled_delivery
   belongs_to :shipping_charge
-  # has_one    :purchase
+  has_one    :purchase
   has_one_attached :image
 
   with_options presence: true do

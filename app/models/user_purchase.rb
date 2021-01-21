@@ -8,8 +8,9 @@ class UserPurchase
     validates :city
     validates :town
     validates :phone_number, format: { with: /\A[0-9]{11}\z/ }
-    validates :user_id, numericality: { other_than: 1 }
-    validates :item_id, numericality: { other_than: 1 }
+    validates :user_id
+    validates :item_id
+    validates :token
   end
 
   def save

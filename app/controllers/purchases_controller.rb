@@ -1,16 +1,14 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user.id || @item.purchase.present?
     @user_purchase = UserPurchase.new
     
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    
     @user_purchase = UserPurchase.new(purchase_params)
     if @user_purchase.valid?
       @user_purchase.save
@@ -27,6 +25,11 @@ class PurchasesController < ApplicationController
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+  
 end
 
-# koさんが出品する → 違うユーザーが購入する → koさんでログインして~/purchase
+

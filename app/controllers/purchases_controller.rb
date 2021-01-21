@@ -5,7 +5,6 @@ class PurchasesController < ApplicationController
   def index
     redirect_to root_path if current_user.id == @item.user.id || @item.purchase.present?
     @user_purchase = UserPurchase.new
-    
   end
 
   def create
@@ -29,7 +28,4 @@ class PurchasesController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-  
 end
-
-

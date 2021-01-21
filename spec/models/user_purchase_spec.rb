@@ -8,7 +8,7 @@ RSpec.describe UserPurchase, type: :model do
       sleep 0.1
       @user_purchase = FactoryBot.build(:user_purchase, item_id: @item.id, user_id: @user.id)
     end
-    
+
     it '全ての値が入力されている時購入できる' do
       expect(@user_purchase).to be_valid
     end
@@ -45,7 +45,7 @@ RSpec.describe UserPurchase, type: :model do
     it 'tokenが空だと購入できない' do
       @user_purchase.token = ''
       @user_purchase.valid?
-      
+
       expect(@user_purchase.errors.full_messages).to include("Token can't be blank")
     end
 
@@ -58,7 +58,7 @@ RSpec.describe UserPurchase, type: :model do
     it 'townが空だと購入できない' do
       @user_purchase.town = ''
       @user_purchase.valid?
-      
+
       expect(@user_purchase.errors.full_messages).to include("Town can't be blank")
     end
 
@@ -71,7 +71,7 @@ RSpec.describe UserPurchase, type: :model do
     it 'prefecture_idが1だと購入できない' do
       @user_purchase.prefecture_id = 1
       @user_purchase.valid?
-      
+
       expect(@user_purchase.errors.full_messages).to include("Prefecture can't be blank")
     end
 

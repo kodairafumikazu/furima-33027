@@ -1,18 +1,22 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: :index
+
   def index
     @item = Item.find(params[:item_id])
-
+    redirect_to root_path if current_user.id == @item.user.id || @item.purchase.present?
     @user_purchase = UserPurchase.new
+    
   end
 
   def create
+    @item = Item.find(params[:item_id])
+    
     @user_purchase = UserPurchase.new(purchase_params)
-
     if @user_purchase.valid?
       @user_purchase.save
       redirect_to root_path
     else
-      redirect_to action: :index
+      render :index
     end
   end
 
@@ -24,3 +28,5 @@ class PurchasesController < ApplicationController
     )
   end
 end
+
+# koさんが出品する → 違うユーザーが購入する → koさんでログインして~/purchase

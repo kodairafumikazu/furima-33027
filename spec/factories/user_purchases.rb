@@ -7,7 +7,7 @@ FactoryBot.define do
     building       { 'ハイツ-101' }
     phone_number   { '09012345678' }
     token          { 'token090' }
-    association :item
-    association :user
+    
+    
   end
 end

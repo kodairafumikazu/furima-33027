@@ -19,14 +19,15 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.building = ''
         expect(@user_purchase).to be_valid
       end
+    end
 
+    context '商品購入ができないとき' do
       it 'user_idが空だと購入できない' do
         @user_purchase.user_id = ''
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include("User can't be blank")
       end
-    end
-    context '商品購入ができないとき' do
+      
       it 'item_idが空だと購入できない' do
         @user_purchase.item_id = ''
         @user_purchase.valid?

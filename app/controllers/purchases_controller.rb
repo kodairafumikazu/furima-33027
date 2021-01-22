@@ -18,13 +18,13 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
+    Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY)
     Payjp::Charge.create(
       amount: order_params[:@item.price],
       card: order_params[:token],
-      currency:'jpy'
+      currency: 'jpy'
     )
- end
+  end
 
   private
 

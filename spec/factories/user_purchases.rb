@@ -7,7 +7,5 @@ FactoryBot.define do
     building       { 'ハイツ-101' }
     phone_number   { '09012345678' }
     token          { 'token090' }
-    
-    
   end
 end

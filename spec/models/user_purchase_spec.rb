@@ -8,7 +8,6 @@ RSpec.describe UserPurchase, type: :model do
     @user_purchase = FactoryBot.build(:user_purchase, item_id: @item.id, user_id: @user.id)
   end
 
-
   describe '商品購入' do
     context '商品購入ができるとき' do
       it '全ての値が入力されている時購入できる' do
@@ -27,7 +26,7 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include("User can't be blank")
       end
-      
+
       it 'item_idが空だと購入できない' do
         @user_purchase.item_id = ''
         @user_purchase.valid?
@@ -74,13 +73,13 @@ RSpec.describe UserPurchase, type: :model do
       it 'phone_numberが12桁以上だと購入できない' do
         @user_purchase.phone_number = '090121232322'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include("Phone number is invalid")
+        expect(@user_purchase.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'phone_numberが英数混合だと購入できない' do
         @user_purchase.phone_number = 'a2a2'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include("Phone number is invalid")
+        expect(@user_purchase.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'prefecture_idが1だと購入できない' do

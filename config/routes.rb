@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     resources :purchases, only: [:create, :index]
   end
 
-  resources :items
 
   
 end

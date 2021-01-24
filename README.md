@@ -72,3 +72,4 @@
 ### Association
 
 - belongs to :purchase
+

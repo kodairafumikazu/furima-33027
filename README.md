@@ -73,5 +73,3 @@
 
 - belongs to :purchase
 
-
-
